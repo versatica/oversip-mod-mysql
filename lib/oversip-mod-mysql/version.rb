@@ -10,6 +10,7 @@ module OverSIP
       end
 
       VERSION = [Version::MAJOR, Version::MINOR, Version::TINY].join(".")
+      VERSION << ".#{Version::DEVEL}"  if Version::DEVEL
     end
 
   end
