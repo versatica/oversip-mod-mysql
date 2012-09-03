@@ -54,15 +54,17 @@ Somewhere within the `OverSIP::SipEvents.on_request()` method in `server.rb`:
 pool = OverSIP::M::Mysql.pool(:my_async_db)
 
 pool.perform do |db_conn|
-  query = db_conn.aquery "SELECT * FROM users WHERE user = \'#{request.ruri.user}\'"
+  query = db_conn.aquery "SELECT * FROM users WHERE user = \'#{request.from.user}\'"
 
   query.callback do |result|
     log_info "DB async query result: #{result.to_a.inspect}"
     if result.any?
+      # Add a X-Header with value the 'custom_header' field of the table row:
+      request.set_header "X-Header", result.first["custom_header"]
       proxy = ::OverSIP::SIP::Proxy.new
       proxy.route request
     else
-      request.reply 404, "Destination user not found in DB"
+      request.reply 404, "User not found in DB"
     end
   end
 
@@ -103,13 +105,15 @@ EM.synchrony do
   pool = OverSIP::M::Mysql.pool(:my_sync_db)
 
   begin
-    result = pool.query "SELECT * FROM users WHERE user = \'#{request.ruri.user}\'"
+    result = pool.query "SELECT * FROM users WHERE user = \'#{request.from.user}\'"
     log_info "DB sync query result: #{result.to_a.inspect}"
     if result.any?
+      # Add a X-Header with value the 'custom_header' field of the table row:
+      request.set_header "X-Header", result.first["custom_header"]
       proxy = ::OverSIP::SIP::Proxy.new :proxy_out
       proxy.route request
     else
-      request.reply 404, "Destination user not found in DB"
+      request.reply 404, "User not found in DB"
     end
 
   rescue ::Mysql2::Error => e
