@@ -8,7 +8,7 @@ Check the [mysql2 documentation](https://github.com/brianmario/mysql2/blob/maste
 ## API
 
 
-### `OverSIP:M:Mysql.add_pool(options, db_data)`
+### Method `OverSIP:M:Mysql.add_pool(options, db_data)`
 
 Creates a MySQL connection pool. Parameters:
 
@@ -22,7 +22,7 @@ Creates a MySQL connection pool. Parameters:
 *NOTE:* There is no need to pass the option `:async => true` in `db_data`. That is automatically done by the library.
 
 
-### `OverSIP:M:Mysql.pool(name)`
+### Method `OverSIP:M:Mysql.pool(name)`
 
 Retrieves a previously created pool with the given name. Raises an `ArgumentError` if the given name does not exist in the list of created pools.
 
