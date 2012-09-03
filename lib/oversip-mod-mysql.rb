@@ -1,5 +1,7 @@
-require "oversip-mod-mysql/version.rb"
 require "mysql2/em"
+
+require "oversip-mod-mysql/version.rb"
+require "oversip-mod-mysql/mysql2_em_client.rb"
 
 
 module OverSIP
