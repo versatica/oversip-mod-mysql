@@ -41,7 +41,7 @@ On top of `/etc/oversip/server.rb`:
 ```
 require "oversip-mod-mysql"
 
-def (OverSIP::SystemEvents).on_configuration
+def (OverSIP::SystemEvents).on_initialize
   OverSIP::M::Mysql.add_pool(
     {
       :name => :my_async_db,
@@ -111,7 +111,7 @@ On top of `/etc/oversip/server.rb`:
 ```
 require "oversip-mod-mysql"
 
-def (OverSIP::SystemEvents).on_configuration
+def (OverSIP::SystemEvents).on_initialize
   OverSIP::M::Mysql.add_pool(
     {
       :name => :my_sync_db,
