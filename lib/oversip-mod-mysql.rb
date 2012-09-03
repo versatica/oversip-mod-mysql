@@ -14,7 +14,7 @@ module OverSIP
       DEFAULT_POOL_SIZE = 10
       DEFAULT_SYNCHRONY = false
 
-      @log_id = "mod mysql"
+      @log_id = "Mysql module"
       @pools = {}
 
       def self.add_pool options, db_data
