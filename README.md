@@ -54,7 +54,7 @@ Somewhere within the `OverSIP::SipEvents.on_request()` method in `server.rb`:
 pool = OverSIP::M::Mysql.pool(:my_async_db)
 
 pool.perform do |db_conn|
-  query = db_conn.aquery "SELECT * FROM users WHERE user = \'#{request.ruri.user}\'"
+  query = db_conn.query "SELECT * FROM users WHERE user = \'#{request.ruri.user}\'"
 
   query.callback do |result|
     log_info "DB async query result: #{result.to_a.inspect}"
