@@ -37,15 +37,28 @@ When creating a pool with `options[:synchrony] => false` (default behaviour) the
 
 ### Example
 
-Create a file `/etc/oversip/modules_conf/mysql.rb`:
+On top of `/etc/oversip/server.rb`:
 
 ```
 require "oversip-mod-mysql"
 
-OverSIP::M::Mysql.add_pool(
-  { :name => :my_async_db, :pool_size => 5, :synchrony => false},
-  { :host => "localhost", :username => "oversip", :password => "xxxxxx", :database => "oversip"}
-)
+def (OverSIP::SystemEvents).on_configuration
+  OverSIP::M::Mysql.add_pool(
+    {
+      :name => :my_async_db,
+      :pool_size => 5,
+      :synchrony => false
+    },
+    {
+      :host => "localhost",
+      :username => "oversip",
+      :password => "xxxxxx",
+      :database => "oversip",
+      :cast_booleans => true,
+      :symbolize_keys => true
+    }
+  )
+end
 ```
 
 Somewhere within the `OverSIP::SipEvents.on_request()` method in `/etc/oversip/server.rb`:
@@ -94,15 +107,28 @@ Please ensure you properly understand how [em-synchrony](https://github.com/igri
 
 ### Example
 
-Create a file `/etc/oversip/modules_conf/mysql.rb`:
+On top of `/etc/oversip/server.rb`:
 
 ```
 require "oversip-mod-mysql"
 
-OverSIP::M::Mysql.add_pool(
-  { :name => :my_sync_db, :pool_size => 5, :synchrony => true},
-  { :host => "localhost", :username => "oversip", :password => "xxxxxx", :database => "oversip"}
-)
+def (OverSIP::SystemEvents).on_configuration
+  OverSIP::M::Mysql.add_pool(
+    {
+      :name => :my_sync_db,
+      :pool_size => 5,
+      :synchrony => true
+    },
+    {
+      :host => "localhost",
+      :username => "oversip",
+      :password => "xxxxxx",
+      :database => "oversip",
+      :cast_booleans => true,
+      :symbolize_keys => true
+    }
+  )
+end
 ```
 
 Somewhere within the `OverSIP::SipEvents.on_request()` method in `/etc/oversip/server.rb`:
