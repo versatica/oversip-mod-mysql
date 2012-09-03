@@ -37,7 +37,7 @@ When creating a pool with `options[:synchrony] => false` (default behaviour) the
 
 ### Example
 
-On top of `/etc/oversip/server.rb`:
+Create a file `/etc/oversip/modules_conf/mysql.rb`:
 
 ```
 require "oversip-mod-mysql"
@@ -48,7 +48,7 @@ OverSIP::M::Mysql.add_pool(
 )
 ```
 
-Somewhere within the `OverSIP::SipEvents.on_request()` method in `server.rb`:
+Somewhere within the `OverSIP::SipEvents.on_request()` method in `/etc/oversip/server.rb`:
 
 ```
 pool = OverSIP::M::Mysql.pool(:my_async_db)
@@ -94,7 +94,7 @@ Please ensure you properly understand how [em-synchrony](https://github.com/igri
 
 ### Example
 
-On top of `/etc/oversip/server.rb`:
+Create a file `/etc/oversip/modules_conf/mysql.rb`:
 
 ```
 require "oversip-mod-mysql"
@@ -105,7 +105,7 @@ OverSIP::M::Mysql.add_pool(
 )
 ```
 
-Somewhere within the `OverSIP::SipEvents.on_request()` method in `server.rb`:
+Somewhere within the `OverSIP::SipEvents.on_request()` method in `/etc/oversip/server.rb`:
 
 ```
 EM.synchrony do
