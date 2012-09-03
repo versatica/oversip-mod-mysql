@@ -54,7 +54,7 @@ Somewhere within the `OverSIP::SipEvents.on_request()` method in `server.rb`:
 pool = OverSIP::M::Mysql.pool(:my_async_db)
 
 pool.perform do |db_conn|
-  query = db_conn.query "SELECT * FROM users WHERE user = \'#{request.ruri.user}\'"
+  query = db_conn.aquery "SELECT * FROM users WHERE user = \'#{request.ruri.user}\'"
 
   query.callback do |result|
     log_info "DB async query result: #{result.to_a.inspect}"
@@ -121,7 +121,7 @@ end
 ```
 
 
-### Using Sync and Async Styles Together
+### Using sync and async styles together
 
 A pool created with `OverSIP:M:Mysql.add_pool()` method must be sync or async. However the user can set two pools, the first one sync and the second one sync.
 
