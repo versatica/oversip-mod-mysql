@@ -53,25 +53,32 @@ Somewhere within the `OverSIP::SipEvents.on_request()` method in `server.rb`:
 ```
 pool = OverSIP::M::Mysql.pool(:my_async_db)
 
-pool.perform do |db_conn|
-  query = db_conn.aquery "SELECT * FROM users WHERE user = \'#{request.from.user}\'"
+begin
+  pool.perform do |db_conn|
+    query = db_conn.aquery "SELECT * FROM users WHERE user = \'#{request.from.user}\'"
 
-  query.callback do |result|
-    log_info "DB async query result: #{result.to_a.inspect}"
-    if result.any?
-      # Add a X-Header with value the 'custom_header' field of the table row:
-      request.set_header "X-Header", result.first["custom_header"]
-      proxy = ::OverSIP::SIP::Proxy.new
-      proxy.route request
-    else
-      request.reply 404, "User not found in DB"
+    query.callback do |result|
+      log_info "DB async query result: #{result.to_a.inspect}"
+      if result.any?
+        # Add a X-Header with value the 'custom_header' field of the table row:
+        request.set_header "X-Header", result.first["custom_header"]
+        proxy = ::OverSIP::SIP::Proxy.new
+        proxy.route request
+      else
+        request.reply 404, "User not found in DB"
+      end
+    end
+
+    query.errback do |error|
+      log_error "DB async query error: #{error.inspect}"
+      request.reply 500, "DB async query error"
     end
   end
 
-  query.errback do |error|
-    log_error "DB async query error: #{error.inspect}"
-    request.reply 500, "DB async query error"
-  end
+rescue ::Mysql2::Error => e
+  log_error "DB async query error:"
+  log_error e
+  request.reply 500, "DB async query error"
 end
 ```
 
