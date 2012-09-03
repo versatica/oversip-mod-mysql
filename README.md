@@ -123,7 +123,7 @@ end
 
 ### Using Sync and Async Styles Together
 
-A pool created with `OverSIP:M:Mysql.add_pool()` method must be sync or async. However the user can set two pools, the first one ssync and the second one sync.
+A pool created with `OverSIP:M:Mysql.add_pool()` method must be sync or async. However the user can set two pools, the first one sync and the second one sync.
 
 When a sync pool is created, the library loads `em-synchrony/mysql2` which overrides the `Mysql2::EM::Client#query()` method. So if *at least* one of your pools uses sync style then you must use the `Mysql2::EM::Client#aquery()` method for the async pool (which is an alias of the original `query()` method).
 
