@@ -12,6 +12,7 @@ module OverSIP
       DEFAULT_POOL_SIZE = 10
       DEFAULT_SYNCHRONY = false
 
+      @log_id = "mod mysql"
       @pools = {}
 
       def self.add_pool options, db_data
@@ -35,6 +36,7 @@ module OverSIP
           end
 
           OverSIP::SystemCallbacks.on_started do
+            log_system_info "Adding a sync pool with name #{name.inspect}..."
             @pools[name] = ::EM::Synchrony::ConnectionPool.new(size: pool_size) do
               ::Mysql2::EM::Client.new(db_data)
             end
@@ -43,6 +45,7 @@ module OverSIP
         # Don't use em-synchrony but pure callbacks.
         else
           OverSIP::SystemCallbacks.on_started do
+            log_system_info "Adding an async pool with name #{name.inspect}..."
             pool = @pools[name] = ::EM::Pool.new
             pool_size.times do
               pool.add ::Mysql2::EM::Client.new(db_data)
