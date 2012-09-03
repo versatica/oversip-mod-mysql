@@ -157,7 +157,7 @@ end
 ```
 
 
-### Using sync and async styles together
+## Using sync and async styles together
 
 A pool created with `OverSIP:M:Mysql.add_pool()` method must be sync or async. However the user can set two pools, the first one sync and the second one sync.
 
