@@ -28,6 +28,9 @@ module OverSIP
         raise ::ArgumentError, "`options[:name]' must be a Symbol"  unless name.is_a? ::Symbol
         raise ::ArgumentError, "`options[:pool_size]' must be a positive Fixnum"  unless pool_size.is_a? ::Fixnum and pool_size > 0
 
+        # Forcing DB autoreconnect.
+        db_data[:reconnect] = true
+
         # Use em-synchrony for serial coding.
         if synchrony
           begin
