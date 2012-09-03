@@ -2,8 +2,7 @@
 
 `oversip-mod-mysql` provides an easy to use MySQL connector for [OverSIP](http://www.oversip.net) proxy based on [mysql2](https://github.com/brianmario/mysql2) driver. The library allows both pure async style (via callbacks) or serial style (by using [em-synchrony](https://github.com/igrigorik/em-synchrony/) Gem).
 
-
-
+Check the [mysql2 documentation](https://github.com/brianmario/mysql2/blob/master/README.md) for the exact syntax and usage of the MySQL queries.
 
 
 ## API
