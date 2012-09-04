@@ -168,7 +168,7 @@ When a sync pool is created, the library loads `em-synchrony/mysql2` which overr
 
 * Ruby > 1.9.2.
 * [oversip](http://www.oversip.net) Gem >= 1.2.0.
-* MySQL development library (the package @libmysqlclient-dev@ in Debian/Ubuntu).
+* MySQL development library (the package `libmysqlclient-dev` in Debian/Ubuntu).
 
 
 ## Installation
