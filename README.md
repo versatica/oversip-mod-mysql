@@ -164,6 +164,13 @@ A pool created with `OverSIP:M:Mysql.add_pool()` method must be sync or async. H
 When a sync pool is created, the library loads `em-synchrony/mysql2` which overrides the `Mysql2::EM::Client#query()` method. So if *at least* one of your pools uses sync style then you must use the `Mysql2::EM::Client#aquery()` method for the async pool (which is an alias of the original `query()` method).
 
 
+## Dependencies
+
+* Ruby > 1.9.2.
+* [oversip](http://www.oversip.net) Gem >= 1.2.0.
+* MySQL development library (the package @libmysqlclient-dev@ in Debian/Ubuntu).
+
+
 ## Installation
 
 ```
