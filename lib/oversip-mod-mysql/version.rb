@@ -6,7 +6,7 @@ module OverSIP
         MAJOR = 0
         MINOR = 0
         TINY  = 1
-        DEVEL = "beta1"  # Set to nil for stable releases.
+        DEVEL = nil  # Set to nil for stable releases.
       end
 
       VERSION = [Version::MAJOR, Version::MINOR, Version::TINY].join(".")

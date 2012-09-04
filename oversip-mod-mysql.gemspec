@@ -7,7 +7,7 @@ require "./lib/oversip-mod-mysql/version"
   spec.authors = ["Inaki Baz Castillo"]
   spec.email = ["ibc@aliax.net"]
   spec.homepage = "https://github.com/versatica/oversip-mod-mysql"
-  spec.summary = "MySQL module for OverSIP"
+  spec.summary = "MySQL connector module for OverSIP"
   spec.description = <<-_END_
 oversip-mod-mysql provides an easy to use MySQL connector for OverSIP proxy. The library allows both pure async style (via callbacks) or serial style (by using 'em-synchrony' Gem).
 _END_
