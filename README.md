@@ -4,7 +4,7 @@
 
 `oversip-mod-mysql` provides an easy to use MySQL connector for [OverSIP](http://www.oversip.net) proxy based on [mysql2](https://github.com/brianmario/mysql2) driver.
 
-Starting from version 0.1.0 `oversip-mod-mysql` depends on [OverSIP](http://www.oversip.net) >= 1.3.0 which enforces the usage of "sync" coding via [em-synchrony](https://github.com/igrigorik/em-synchrony/) Gem).
+Starting from version 0.1.0 `oversip-mod-mysql` depends on [OverSIP](http://www.oversip.net) >= 1.3.0 which enforces the usage of "sync" style coding via [em-synchrony](https://github.com/igrigorik/em-synchrony/) Gem.
 
 * For more information about `em-synchrony` usage check [Untangling Evented Code with Ruby Fibers](http://www.igvita.com/2010/03/22/untangling-evented-code-with-ruby-fibers/).
 
@@ -35,12 +35,7 @@ Retrieves a previously created pool with the given name. Raises an `ArgumentErro
 
 
 
-## Usage
-
-When creating a pool with `options[:synchrony] => true`  the obtained pool is a [`EventMachine::Synchrony::ConnectionPool`](https://github.com/igrigorik/em-synchrony/blob/master/lib/em-synchrony/connection_pool.rb) instance.
-
-
-### Example
+## Usage Example
 
 On top of `/etc/oversip/server.rb`:
 
