@@ -114,4 +114,4 @@ end
 
 Iñaki Baz Castillo
 * Mail: ibc@aliax.net
-* Github profile: [@ibc](https://github.com/ibc))
+* Github profile: [@ibc](https://github.com/ibc)
