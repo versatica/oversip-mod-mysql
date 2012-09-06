@@ -14,7 +14,7 @@ Check the [mysql2 documentation](https://github.com/brianmario/mysql2/blob/maste
 ## API
 
 
-### Method `OverSIP:M:Mysql.add_pool(options, db_data)`
+### Method `OverSIP::Modules::Mysql.add_pool(options, db_data)`
 
 Creates a MySQL connection pool. Parameters:
 
@@ -29,7 +29,7 @@ The method allows passing a block which would be later called by passing as argu
 The created connection pool is an instance of [`EventMachine::Synchrony::ConnectionPool`](https://github.com/igrigorik/em-synchrony/blob/master/lib/em-synchrony/connection_pool.rb).
 
 
-### Method `OverSIP:M:Mysql.pool(name)`
+### Method `OverSIP::Modules::Mysql.pool(name)`
 
 Retrieves a previously created pool with the given name. Raises an `ArgumentError` if the given name does not exist in the list of created pools.
 
