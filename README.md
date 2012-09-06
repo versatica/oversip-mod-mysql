@@ -51,8 +51,7 @@ def (OverSIP::SystemEvents).on_initialize
   OverSIP::M::Mysql.add_pool(
     {
       :name => :my_db,
-      :pool_size => 5,
-      :synchrony => true
+      :pool_size => 5
     },
     {
       :host => "localhost",
