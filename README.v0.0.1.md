@@ -1,5 +1,12 @@
 # oversip-mod-mysql
 
+## IMPORTANT
+
+This is the documentation for `oversip-mod-mysql` version 0.0.1, just compatible with [OverSIP](http://www.oversip.net) version >= 1.2.0 and < 1.3.0. For new versions of OverSIP check the [documentation](https://github.com/versatica/oversip-mod-mysql/blob/master/README.md) of the current version.
+
+
+## Overview
+
 `oversip-mod-mysql` provides an easy to use MySQL connector for [OverSIP](http://www.oversip.net) proxy based on [mysql2](https://github.com/brianmario/mysql2) driver. The library allows both pure async style (via callbacks) or serial style (by using [em-synchrony](https://github.com/igrigorik/em-synchrony/) Gem).
 
 Check the [mysql2 documentation](https://github.com/brianmario/mysql2/blob/master/README.md) for the exact syntax and usage of the MySQL queries.

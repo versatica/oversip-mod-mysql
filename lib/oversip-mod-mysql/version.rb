@@ -4,8 +4,8 @@ module OverSIP
     module Mysql
       module Version
         MAJOR = 0
-        MINOR = 0
-        TINY  = 1
+        MINOR = 1
+        TINY  = 0
         DEVEL = nil  # Set to nil for stable releases.
       end
 
