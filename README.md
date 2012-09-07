@@ -14,22 +14,21 @@ Check the [mysql2 documentation](https://github.com/brianmario/mysql2/blob/maste
 ## API
 
 
-### Method `OverSIP::Modules::Mysql.add_pool(options, db_data)`
+### Method `OverSIP::Modules::Mysql.add_pool(options)`
 
 Creates a MySQL connection pool. Parameters:
 
 * `options`: A mandatory `Hash` with the following fields:
-   * `:name`: Mandatory field. Must be a `Symbol` with the name for this pool.
+   * `:pool_name`: Mandatory field. Must be a `Symbol` with the name for this pool.
    * `:pool_size`: The number of parallel MySQL connections to perform. By default 10.
-
-* `db_data`: A mandatory `Hash` that will be passed to [`Mysql2::EM::Client.new`](https://github.com/brianmario/mysql2#connection-options).
+   * The rest of the fields will be passed to each [`Mysql2::EM::Client.new`](https://github.com/brianmario/mysql2#connection-options) being created.
 
 The method allows passing a block which would be later called by passing as argument each generated `Mysql2::EM::Client` instance.
 
 The created connection pool is an instance of [`EventMachine::Synchrony::ConnectionPool`](https://github.com/igrigorik/em-synchrony/blob/master/lib/em-synchrony/connection_pool.rb).
 
 
-### Method `OverSIP::Modules::Mysql.pool(name)`
+### Method `OverSIP::Modules::Mysql.pool(pool_name)`
 
 Retrieves a previously created pool with the given name. Raises an `ArgumentError` if the given name does not exist in the list of created pools.
 
@@ -48,20 +47,14 @@ Within the `OverSIP::SipEvents.on_initialize()` method in `/etc/oversip/server.r
 
 ```
 def (OverSIP::SystemEvents).on_initialize
-  OverSIP::M::Mysql.add_pool(
-    {
-      :name => :my_db,
-      :pool_size => 5
-    },
-    {
-      :host => "localhost",
-      :username => "oversip",
-      :password => "xxxxxx",
-      :database => "oversip"
-    } do |conn|
-      log_info "MySQL created instance: #{conn.inspect}"
-    end
-  )
+  OverSIP::M::Mysql.add_pool({
+    :pool_name => :my_db,
+    :pool_size => 5,
+    :host => "localhost",
+    :username => "oversip",
+    :password => "xxxxxx",
+    :database => "oversip"
+  }) {|conn| log_info "MySQL created instance: #{conn.inspect}" }
 end
 ```
 
