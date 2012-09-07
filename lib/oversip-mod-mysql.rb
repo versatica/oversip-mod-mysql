@@ -27,15 +27,19 @@ module OverSIP
         raise ::ArgumentError, "`options[:pool_name]' must be a Symbol"  unless pool_name.is_a? ::Symbol
         raise ::ArgumentError, "`options[:pool_size]' must be a positive Fixnum"  unless pool_size.is_a? ::Fixnum and pool_size > 0
 
-        # Forcing DB autoreconnect.
-        options[:reconnect] = true
+        block = ::Proc.new  if block_given?
 
-        block = Proc.new  if block_given?
-
-        OverSIP::SystemCallbacks.on_started do
+        ::OverSIP::SystemCallbacks.on_started do
           log_info "Adding MySQL connection pool (name: #{pool_name.inspect}, size: #{pool_size})..."
           @pools[pool_name] = ::EM::Synchrony::ConnectionPool.new(size: pool_size) do
-            conn = ::Mysql2::EM::Client.new(options)
+            # Avoid the hash to be modified internally.
+            new_options = options.clone
+            # Force DB autoreconnect.
+            new_options[:reconnect] = true
+
+            conn = ::Mysql2::EM::Client.new(new_options)
+
+            # Call the given block by passing conn as argument.
             block.call(conn)  if block
             conn
           end
