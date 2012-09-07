@@ -19,6 +19,8 @@ module OverSIP
       def self.add_pool options
         raise ::ArgumentError, "`options' must be a Hash"  unless options.is_a? ::Hash
 
+        options = options.clone
+
         pool_name = options.delete(:pool_name)
         pool_size = options.delete(:pool_size) || DEFAULT_POOL_SIZE
 
