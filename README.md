@@ -16,12 +16,10 @@ Check the [mysql2 documentation](https://github.com/brianmario/mysql2/blob/maste
 
 ### Method `OverSIP::Modules::Mysql.add_pool(options)`
 
-Creates a MySQL connection pool. Parameters:
-
-* `options`: A mandatory `Hash` with the following fields:
-   * `:pool_name`: Mandatory field. Must be a `Symbol` with the name for this pool.
-   * `:pool_size`: The number of parallel MySQL connections to perform. By default 10.
-   * The rest of the fields will be passed to each [`Mysql2::EM::Client.new`](https://github.com/brianmario/mysql2#connection-options) being created.
+Creates a MySQL connection pool by receiving a mandatory `options` (a `Hash`) with the following fields:
+* `:pool_name`: Mandatory field. Must be a `Symbol` with the name for this pool.
+* `:pool_size`: The number of parallel MySQL connections to perform. By default 10.
+* The rest of the fields will be passed to each [`Mysql2::EM::Client.new`](https://github.com/brianmario/mysql2#connection-options) being created.
 
 The method allows passing a block which would be later called by passing as argument each generated `Mysql2::EM::Client` instance.
 
