@@ -52,7 +52,7 @@ def (OverSIP::SystemEvents).on_initialize
     :username => "oversip",
     :password => "xxxxxx",
     :database => "oversip"
-  }) {|conn| log_info "MySQL created instance: #{conn.inspect}" }
+  }) {|conn| log_info "MySQL created connection: #{conn.inspect}" }
 end
 ```
 
