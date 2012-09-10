@@ -84,6 +84,11 @@ end
 ```
 
 
+## Limitations
+
+[mysql2](https://github.com/brianmario/mysql2) driver has auto reconnection support (which is forced by `oversip-mod-mysql` by setting the field `options[:reconnect] => true`). Unfortunatelly the auto reconnect feature of `mysql2` driver is blocking which means that, in case the MySQL server goes down, OverSIP will get frozen during the auto reconnection attempt.
+
+
 ## Dependencies
 
 * Ruby > 1.9.2.
