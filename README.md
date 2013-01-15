@@ -84,6 +84,19 @@ end
 ```
 
 
+## Notes
+
+* If you want to place a SQL query within an event different than those provided by OverSIP (i.e. within a EventMachine `add_timer` or `next_tick` callback) then you need to create a Fiber and place the SQL query there (otherwise "can't yield from root fiber" error will occur):
+```
+EM.add_periodic_timer(2) do
+  Fiber.new do
+    pool = OverSIP::M::Mysql.pool(:my_db)
+    rows = pool.query "SELECT * FROM users"
+    log_info "online users: #{rows.inspect}"
+  end
+end
+```
+
 ## Limitations
 
 [mysql2](https://github.com/brianmario/mysql2) driver has auto reconnection support (which is forced by `oversip-mod-mysql` by setting the field `options[:reconnect] => true`). Unfortunatelly the auto reconnect feature of `mysql2` driver is blocking which means that, in case the MySQL server goes down, OverSIP will get frozen during the auto reconnection attempt.
