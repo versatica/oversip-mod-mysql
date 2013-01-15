@@ -86,7 +86,10 @@ end
 
 ## Notes
 
-* If you want to place a SQL query within an event different than those provided by OverSIP (i.e. within a EventMachine `add_timer` or `next_tick` callback) then you need to create a Fiber and place the SQL query there (otherwise "can't yield from root fiber" error will occur):
+### SQL queries in events others than OverSIP provides
+
+If you want to place a SQL query within an event different than those provided by OverSIP (i.e. within a EventMachine `add_timer` or `next_tick` callback) then you need to create a Fiber and place the SQL query there (otherwise "can't yield from root fiber" error will occur):
+
 ```
 EM.add_periodic_timer(2) do
   Fiber.new do
