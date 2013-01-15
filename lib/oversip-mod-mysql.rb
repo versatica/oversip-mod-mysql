@@ -19,6 +19,9 @@ module OverSIP
       def self.add_pool options
         raise ::ArgumentError, "`options' must be a Hash"  unless options.is_a? ::Hash
 
+        # Avoid the hash to be modified internally.
+        options = options.clone
+        # Delete options not existing in mysql2.
         pool_name = options.delete(:pool_name)
         pool_size = options.delete(:pool_size) || DEFAULT_POOL_SIZE
 
@@ -31,11 +34,11 @@ module OverSIP
           log_info "Adding MySQL connection pool (name: #{pool_name.inspect}, size: #{pool_size})..."
           @pools[pool_name] = ::EM::Synchrony::ConnectionPool.new(size: pool_size) do
             # Avoid the hash to be modified internally.
-            new_options = options.clone
+            options = options.clone
             # Force DB autoreconnect.
-            new_options[:reconnect] = true
+            options[:reconnect] = true
 
-            conn = ::Mysql2::EM::Client.new(new_options)
+            conn = ::Mysql2::EM::Client.new(options)
 
             # Call the given block by passing conn as argument.
             block.call(conn)  if block
