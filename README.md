@@ -92,7 +92,7 @@ end
 ## Dependencies
 
 * Ruby > 1.9.2.
-* [oversip](http://www.oversip.net) Gem >= 1.3.0.
+* [oversip](http://www.oversip.net) Gem >= 1.3.7.
 * MySQL development library (the package `libmysqlclient-dev` in Debian/Ubuntu).
 
 
