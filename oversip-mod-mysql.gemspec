@@ -11,7 +11,7 @@ require "./lib/oversip-mod-mysql/version"
   spec.description = "oversip-mod-mysql provides an easy to use MySQL connector for OverSIP proxy."
 
   spec.required_ruby_version = ">= 1.9.2"
-  spec.add_dependency "oversip", ">= 1.3.0"
+  spec.add_dependency "oversip", ">= 1.3.7"
   spec.add_dependency "mysql2", ">= 0.3.11"
 
   spec.files = ::Dir.glob %w{
